@@ -72,16 +72,16 @@ module Helper._CommandingSurface {
     // Verify correct rendered states for opened and closed _CommandingSurface
     //
 
-    export function verifyRenderedOpened(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
+    export function verifyCommandingSurfaceRenderedOpened(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
         // Verifies actionarea and overflowarea are opened. 
         // Currently only works if there is at least one command in the actionarea and overflow area.
         // TODO: Make this work even if actionarea and overflowarea don't have commands.
 
-        verifyRenderedOpened_actionArea(commandingSurface);
-        verifyRenderedOpened_overflowArea(commandingSurface);
+        verifyOpened_actionArea(commandingSurface);
+        verifyOpened_overflowArea(commandingSurface);
     };
 
-    function verifyRenderedOpened_actionArea(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
+    function verifyOpened_actionArea(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
 
         var commandElements = Helper._CommandingSurface.getVisibleCommandsInElement(commandingSurface._dom.actionArea),
             commandingSurfaceTotalHeight = WinJS.Utilities.getTotalHeight(commandingSurface.element),
@@ -113,23 +113,23 @@ module Helper._CommandingSurface {
         }
     };
 
-    function verifyRenderedOpened_overflowArea(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
+    function verifyOpened_overflowArea(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
         LiveUnit.Assert.areNotEqual("none", getComputedStyle(commandingSurface._dom.overflowArea).display);
 
         var overflowAreaTotalHeight = WinJS.Utilities.getTotalHeight(commandingSurface._dom.overflowArea);
         LiveUnit.Assert.isTrue(0 < overflowAreaTotalHeight);
     };
 
-    export function verifyRenderedClosed(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
+    export function verifyCommandingSurfaceRenderedClosed(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
         // Verifies actionarea and overflowarea are closed.
         // Currently only works if their is at least one command in the actionarea and overflow area.
         // TODO: Make this work even if actionarea and overflowarea don't have commands.
 
-        verifyRenderedClosed_actionArea(commandingSurface);
-        verifyRenderedClosed_oveflowArea(commandingSurface);
+        verifyClosed_actionArea(commandingSurface);
+        verifyClosed_oveflowArea(commandingSurface);
     };
 
-    function verifyRenderedClosed_actionArea(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
+    function verifyClosed_actionArea(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
         var closedDisplayMode = commandingSurface.closedDisplayMode;
 
         var commandElements = Helper._CommandingSurface.getVisibleCommandsInElement(commandingSurface._dom.actionArea),
@@ -181,7 +181,7 @@ module Helper._CommandingSurface {
 
             case _CommandingSurface.ClosedDisplayMode.full:
                 // closedDisplayMode "full" actionarea, and opened actionarea, render exactly the same.
-                verifyRenderedOpened_actionArea(commandingSurface);
+                verifyOpened_actionArea(commandingSurface);
                 break;
 
             default:
@@ -190,7 +190,7 @@ module Helper._CommandingSurface {
         }
     }
 
-    function verifyRenderedClosed_oveflowArea(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
+    function verifyClosed_oveflowArea(commandingSurface: WinJS.UI.PrivateCommandingSurface) {
         var overflowAreaTotalHeight = WinJS.Utilities.getTotalHeight(commandingSurface._dom.overflowArea);
         LiveUnit.Assert.areEqual(0, overflowAreaTotalHeight);
     };

@@ -1337,7 +1337,7 @@ module CorsicaTests {
             Object.keys(_CommandingSurface.ClosedDisplayMode).forEach(function (mode) {
                 commandingSurface.closedDisplayMode = mode;
                 LiveUnit.Assert.areEqual(mode, commandingSurface.closedDisplayMode, "closedDisplayMode property should be writeable.");
-                Helper._CommandingSurface.verifyRenderedClosed(commandingSurface);
+                Helper._CommandingSurface.verifyCommandingSurfaceRenderedClosed(commandingSurface);
             });
         }
 
@@ -1361,15 +1361,15 @@ module CorsicaTests {
             ]);
             var commandingSurface = new _CommandingSurface(this._element, { data: data, opened: false });
             Helper._CommandingSurface.useSynchronousAnimations(commandingSurface);
-            Helper._CommandingSurface.verifyRenderedClosed(commandingSurface);
+            Helper._CommandingSurface.verifyCommandingSurfaceRenderedClosed(commandingSurface);
 
             commandingSurface.opened = true;
             LiveUnit.Assert.isTrue(commandingSurface.opened, "opened property should be writeable.");
-            Helper._CommandingSurface.verifyRenderedOpened(commandingSurface);
+            Helper._CommandingSurface.verifyCommandingSurfaceRenderedOpened(commandingSurface);
 
             commandingSurface.opened = false;
             LiveUnit.Assert.isFalse(commandingSurface.opened, "opened property should be writeable.");
-            Helper._CommandingSurface.verifyRenderedClosed(commandingSurface);
+            Helper._CommandingSurface.verifyCommandingSurfaceRenderedClosed(commandingSurface);
         }
 
         testOpen() {
@@ -1383,7 +1383,7 @@ module CorsicaTests {
 
             commandingSurface.open();
             LiveUnit.Assert.isTrue(commandingSurface.opened)
-            Helper._CommandingSurface.verifyRenderedOpened(commandingSurface);
+            Helper._CommandingSurface.verifyCommandingSurfaceRenderedOpened(commandingSurface);
         }
 
         testOpenIsIdempotent() {
@@ -1406,7 +1406,7 @@ module CorsicaTests {
             // Verify nothing changes when opening again.
             commandingSurface.open();
             LiveUnit.Assert.isTrue(commandingSurface.opened)
-            Helper._CommandingSurface.verifyRenderedOpened(commandingSurface);
+            Helper._CommandingSurface.verifyCommandingSurfaceRenderedOpened(commandingSurface);
         }
 
         testClose() {
@@ -1420,7 +1420,7 @@ module CorsicaTests {
 
             commandingSurface.close();
             LiveUnit.Assert.isFalse(commandingSurface.opened)
-            Helper._CommandingSurface.verifyRenderedClosed(commandingSurface);
+            Helper._CommandingSurface.verifyCommandingSurfaceRenderedClosed(commandingSurface);
         }
 
         testCloseIsIdempotent() {
@@ -1443,7 +1443,7 @@ module CorsicaTests {
             // Verify nothing changes when closing again.
             commandingSurface.close();
             LiveUnit.Assert.isFalse(commandingSurface.opened)
-            Helper._CommandingSurface.verifyRenderedClosed(commandingSurface);
+            Helper._CommandingSurface.verifyCommandingSurfaceRenderedClosed(commandingSurface);
         }
 
         testOverFlowButtonClick() {
@@ -1457,11 +1457,11 @@ module CorsicaTests {
 
             commandingSurface._dom.overflowButton.click()
             LiveUnit.Assert.isFalse(commandingSurface.opened)
-            Helper._CommandingSurface.verifyRenderedClosed(commandingSurface);
+            Helper._CommandingSurface.verifyCommandingSurfaceRenderedClosed(commandingSurface);
 
             commandingSurface._dom.overflowButton.click()
             LiveUnit.Assert.isTrue(commandingSurface.opened)
-            Helper._CommandingSurface.verifyRenderedOpened(commandingSurface);
+            Helper._CommandingSurface.verifyCommandingSurfaceRenderedOpened(commandingSurface);
         }
 
         testDomLevel0_OpenCloseEvents() {
